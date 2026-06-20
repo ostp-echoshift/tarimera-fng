@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarimera FNG · Tarimas de Calidad en Zapopan</title>
+  <meta name="description" content="Fabricación y venta de tarimas nuevas y recuperadas en Zapopan, Jalisco. Calidad garantizada, entrega rápida y los mejores precios.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/ds/tarimera-ds.css">
+  <style>
+    /* ---------- VARIABLES ---------- */
+    :root {
+      --accent: #F5B642;
+      --accent-hover: #FFC857;
+      --text: #FFFFFF;
+      --text-muted: #DDDDDD;
+      --card-bg: rgba(0, 0, 0, 0.75);
+      --card-border: rgba(255,255,255,0.1);
+      --shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: #000; /* fallback */
+      overflow-x: hidden;
+    }
+
+    /* ---------- FONDO FIJO CON CARRUSEL ---------- */
+    .bg-carousel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .bg-slide.active {
+      opacity: 1;
+    }
+
+    /* Overlay oscuro para mejorar legibilidad */
+    .bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 1;
+    }
+
+    /* ---------- CONTENIDO SCROLLABLE ---------- */
+    .content {
+      position: relative;
+      z-index: 2;
+      padding-top: 72px; /* altura del navbar */
+    }
+
+    /* Secciones estilo "card" */
+    .section-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(4px);
+      border-radius: 32px;
+      margin: 2rem auto;
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .section-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Contenedor interno */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Tipografía */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .section-title span {
+      color: var(--accent);
+    }
+
+    /* Botones */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0A0A0A;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      border-color: rgba(255,255,255,0.4);
+      color: var(--text);
+      background: transparent;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Services grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .service-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
+    .service-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Process steps */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .step-number {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      color: #0A0A0A;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.25rem;
+      margin: 0 auto 1rem;
+    }
+    .step h3 {
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+    }
+    .step p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .feature {
+      display: flex;
+      align-items: start;
+      gap: 1rem;
+    }
+    .feature-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .feature h3 {
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Testimonials */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .testimonial {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2rem;
+    }
+    .stars {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+    .testimonial p {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      margin-bottom: 1.5rem;
+    }
+    .testimonial-author {
+      font-weight: 600;
+    }
+    .testimonial-author small {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      display: block;
+    }
+
+    /* FAQ */
+    .faq-item {
+      border-bottom: 1px solid var(--card-border);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-question {
+      padding: 1.25rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .faq-question span {
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+    .faq-answer {
+      padding-bottom: 1.25rem;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    /* Contact form */
+    .contact-form {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: rgba(0,0,0,0.6);
+      padding: 2rem;
+      border-radius: 24px;
+      text-align: left;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .stats-grid,
+      .process-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+      .section-title {
+        font-size: 1.75rem;
+      }
+      .section-card {
+        margin: 1rem;
+        padding: 2rem 1.5rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .stats-grid,
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FONDO FIJO CON CARRUSEL -->
+  <div class="bg-carousel">
+    <div class="bg-slide" style="background-image: url('src/img/slides/tarimas-de-madera-en-guadalajara-jalisco.jpg');"></div>
+    <div class="bg-slide" style="background-image: url('src/img/slides/tarimas-de-madera.jpg');"></div>
+    <div class="bg-slide" style="background-image: url('src/img/slides/transporte-de-tarimas-de-madera.jpg');"></div>
+    <div class="bg-overlay"></div>
+  </div>
+
+  <!-- CONTENIDO SCROLLABLE -->
+  <div class="content">
+
+    <!-- NAVBAR (se mantiene con fondo sólido para legibilidad) -->
+    <header class="tn-nav" id="tn-nav">
+      <div class="tn-nav-inner">
+        <a href="index.html" class="tn-logo">Tarimera <span class="tn-logo-accent">FNG</span></a>
+        <ul class="tn-nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="catalogo-funnel.html">Catálogo</a></li>
+          <li><a href="landing-tarimas.html">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <a href="https://wa.me/523317575573?text=Hola%2C%20quiero%20cotizar" class="tn-btn tn-btn-primary tn-btn-sm">Cotizar</a>
+      </div>
+    </header>
+
+    <!-- HERO (sección de bienvenida) -->
+    <div class="section-card" style="text-align: center; margin-top: 4rem;">
+      <div class="container">
+        <h1 style="font-size: 3rem; margin-bottom: 1rem;">Tarimas de Calidad que Impulsan tu Negocio</h1>
+        <p style="font-size: 1.125rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem;">Fabricación y venta de tarimas nuevas y recuperadas en Zapopan, Jalisco. Soluciones logísticas resistentes, duraderas y al mejor precio.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="https://wa.me/523317575573?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20de%20tarimas" class="btn btn-primary" target="_blank">📱 Cotizar por WhatsApp</a>
+          <a href="#servicios" class="btn btn-outline">Ver productos →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="section-card">
+      <div class="container">
+        <div class="stats-grid">
+          <div><div class="stat-number">10+</div><div class="stat-label">Años de experiencia</div></div>
+          <div><div class="stat-number">500+</div><div class="stat-label">Clientes satisfechos</div></div>
+          <div><div class="stat-number">50K+</div><div class="stat-label">Tarimas fabricadas</div></div>
+          <div><div class="stat-number">24-48h</div><div class="stat-label">Entrega rápida</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div id="servicios" class="section-card">
+      <div class="container">
+        <h2 class="section-title">Nuestros <span>Productos y Servicios</span></h2>
+        <div class="services-grid">
+          <div class="service-card"><span class="service-icon">🌲</span><h3>Tarimas Nuevas</h3><p>Fabricadas con madera de primera calidad, tratada y certificada. Medidas estándar y personalizadas.</p><a href="#contacto" class="service-link">Cotizar →</a></div>
+          <div class="service-card"><span class="service-icon">♻️</span><h3>Tarimas Recuperadas</h3><p>Reparación y reacondicionamiento. Solución económica y ecológica para tu negocio.</p><a href="#contacto" class="service-link">Cotizar →</a></div>
+          <div class="service-card"><span class="service-icon">📦</span><h3>Tarimas a la Medida</h3><p>Diseño y fabricación según tus especificaciones y necesidades logísticas.</p><a href="#contacto" class="service-link">Cotizar →</a></div>
+          <div class="service-card"><span class="service-icon">🔧</span><h3>Reparación de Tarimas</h3><p>Servicio profesional. Extendemos la vida útil de tus tarimas con garantía.</p><a href="#contacto" class="service-link">Cotizar →</a></div>
+          <div class="service-card"><span class="service-icon">🏭</span><h3>Venta al Mayoreo</h3><p>Precios especiales para compras voluminosas. Ideal para distribuidores.</p><a href="#contacto" class="service-link">Cotizar →</a></div>
+          <div class="service-card"><span class="service-icon">🚚</span><h3>Entrega a Domicilio</h3><p>Entrega en Zapopan y área metropolitana. Rápido, seguro y al mejor precio.</p><a href="#contacto" class="service-link">Cotizar →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROCESS -->
+    <div id="proceso" class="section-card">
+      <div class="container">
+        <h2 class="section-title">¿Cómo <span>Trabajamos?</span></h2>
+        <div class="process-steps">
+          <div class="step"><div class="step-number">1</div><h3>Cotización</h3><p>Nos contactas. Analizamos tus necesidades y te damos el mejor precio en minutos.</p></div>
+          <div class="step"><div class="step-number">2</div><h3>Producción</h3><p>Fabricamos o preparamos tus tarimas con altos estándares de calidad.</p></div>
+          <div class="step"><div class="step-number">3</div><h3>Entrega</h3><p>Te entregamos en 24-48 horas en tu domicilio o negocio.</p></div>
+          <div class="step"><div class="step-number">4</div><h3>Satisfacción</h3><p>Garantizamos la calidad. Tu satisfacción es nuestra prioridad.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY US -->
+    <div class="section-card">
+      <div class="container">
+        <h2 class="section-title">¿Por Qué Elegir <span>Tarimera FNG?</span></h2>
+        <div class="features">
+          <div class="feature"><div class="feature-icon">✓</div><div><h3>Calidad Garantizada</h3><p>Madera seleccionada y tratada. Estándares internacionales de resistencia.</p></div></div>
+          <div class="feature"><div class="feature-icon">⚡</div><div><h3>Entrega Rápida</h3><p>Entregamos en 24-48 horas en la zona metropolitana.</p></div></div>
+          <div class="feature"><div class="feature-icon">💰</div><div><h3>Mejores Precios</h3><p>Competimos en precio sin comprometer la calidad.</p></div></div>
+          <div class="feature"><div class="feature-icon">🎯</div><div><h3>Personalización</h3><p>Fabricamos a la medida exacta que necesitas.</p></div></div>
+          <div class="feature"><div class="feature-icon">🌱</div><div><h3>Compromiso Ecológico</h3><p>Madera sostenible. Reciclamos y reparamos para reducir desperdicios.</p></div></div>
+          <div class="feature"><div class="feature-icon">🤝</div><div><h3>Atención Personalizada</h3><p>Te asesoramos directamente, sin intermediarios.</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div id="clientes" class="section-card">
+      <div class="container">
+        <h2 class="section-title">Lo que dicen <span>nuestros clientes</span></h2>
+        <div class="testimonial-grid">
+          <div class="testimonial"><div class="stars">★★★★★</div><p>"Excelente calidad. Las he comprado por más de 2 años y siempre cumplen. Entrega rápida y precio competitivo."</p><div class="testimonial-author">Roberto Sánchez <small>Dueño de Bodega · Zapopan</small></div></div>
+          <div class="testimonial"><div class="stars">★★★★★</div><p>"Necesitaba tarimas personalizadas y me las hicieron exactas. Muy profesionales. Ya soy cliente fijo."</p><div class="testimonial-author">María González <small>Productora de Alimentos · Guadalajara</small></div></div>
+          <div class="testimonial"><div class="stars">★★★★★</div><p>"El servicio de reparación es excelente. Recuperaron tarimas que pensé que ya no servían. Ahorré mucho dinero."</p><div class="testimonial-author">Carlos Mendoza <small>Logística · Tlaquepaque</small></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div id="faq" class="section-card">
+      <div class="container">
+        <h2 class="section-title">Preguntas <span>Frecuentes</span></h2>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">¿Cuáles son las medidas estándar?<span>+</span></div><div class="faq-answer"><p>Trabajamos con 120x100 cm, 120x80 cm, 100x100 cm y 120x120 cm. También fabricamos a medida.</p></div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">¿Cuál es el tiempo de entrega?<span>+</span></div><div class="faq-answer"><p>Para stock: 24-48h. Para personalizados o mayoreo: 3-5 días hábiles.</p></div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">¿Hacen entregas fuera de Zapopan?<span>+</span></div><div class="faq-answer"><p>Sí, en toda el área metropolitana de Guadalajara. El costo depende de ubicación y volumen.</p></div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">¿Venden al mayoreo?<span>+</span></div><div class="faq-answer"><p>Sí, precios especiales para +50 tarimas. Contáctanos para cotización preferencial.</p></div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">¿Tienen garantía?<span>+</span></div><div class="faq-answer"><p>Tarimas nuevas: garantía de fabricación. Recuperadas/reparadas: 30 días de garantía.</p></div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">¿Aceptan pedidos urgentes?<span>+</span></div><div class="faq-answer"><p>Sí. Contáctanos por WhatsApp al 33 2263 1883 y haremos lo posible por atenderte el mismo día.</p></div></div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contacto" class="section-card" style="margin-bottom: 4rem;">
+      <div class="container">
+        <h2 class="section-title">Solicita tu <span>Cotización Gratis</span></h2>
+        <p style="color: var(--text-muted); text-align: center; max-width: 600px; margin: 0 auto 2rem;">Completa el formulario y te contactamos en menos de 30 minutos</p>
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group"><label for="nombre">Nombre completo *</label><input type="text" id="nombre" name="nombre" required placeholder="Tu nombre"></div>
+            <div class="form-group"><label for="telefono">Teléfono o WhatsApp *</label><input type="tel" id="telefono" name="telefono" required placeholder="33 1234 5678"></div>
+            <div class="form-group"><label for="email">Correo electrónico</label><input type="email" id="email" name="email" placeholder="tu@email.com"></div>
+            <div class="form-group"><label for="tipo">Tipo de tarima *</label><select id="tipo" name="tipo" required><option value="">Selecciona</option><option value="nuevas">Tarimas Nuevas</option><option value="recuperadas">Recuperadas</option><option value="personalizadas">Personalizadas</option><option value="reparacion">Reparación</option><option value="mayoreo">Mayoreo (+50)</option></select></div>
+            <div class="form-group"><label for="cantidad">Cantidad aproximada</label><input type="number" id="cantidad" name="cantidad" placeholder="¿Cuántas tarimas?"></div>
+            <div class="form-group"><label for="mensaje">Mensaje adicional</label><textarea id="mensaje" name="mensaje" placeholder="Cuéntanos más..."></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">📱 Enviar por WhatsApp</button>
+            <p style="margin-top:1rem; font-size:0.75rem; text-align:center; color:var(--text-muted);">✓ Respuesta en menos de 30 minutos · ✓ Sin compromiso</p>
+          </form>
+        </div>
+        <div style="margin-top:3rem; text-align:center;">
+          <p style="font-size:1.125rem; margin-bottom:1rem;">📍 Visítanos</p>
+          <p><strong>C. Amapola SN, La Magdalena<br>45200 Zapopan, Jalisco</strong></p>
+          <p style="margin-top:1rem;">📞 <a href="tel:3317575573" style="color:var(--accent);">33 1757 5573</a></p>
+          <p>🕐 <strong>Horario:</strong> Lunes a Viernes 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER (con fondo sólido) -->
+    <footer class="tn-footer">
+      <div class="tn-container">
+        <div class="tn-footer-grid">
+          <div>
+            <a href="index.html" class="tn-logo" style="margin-bottom:1rem;display:inline-flex">Tarimera <span class="tn-logo-accent">FNG</span></a>
+            <p class="tn-footer-brand">Fabricación y venta de tarimas de madera en Zapopan, Jalisco. Calidad garantizada, entrega en 24-48 horas.</p>
+          </div>
+          <div>
+            <p class="tn-footer-heading">Productos</p>
+            <ul class="tn-footer-links">
+              <li><a href="catalogo-funnel.html">Tarimas nuevas</a></li>
+              <li><a href="catalogo-funnel.html?f=recuperadas">Tarimas recuperadas</a></li>
+              <li><a href="catalogo-funnel.html?f=especializadas">Especializadas</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="tn-footer-heading">Contacto</p>
+            <ul class="tn-footer-links">
+              <li><a href="tel:3317575573">33 1757 5573</a></li>
+              <li><a href="mailto:ventas@tarimerafng.com">ventas@tarimerafng.com</a></li>
+              <li><a href="contacto.html">Formulario de contacto</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="tn-footer-copy">
+          <span>© 2026 Tarimera FNG · Zapopan, Jalisco, México</span>
+          <span>Sitio por <a href="https://wa.me/523317575573" style="color:var(--tn-amber)">OSTP @echoShift</a></span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- BOTÓN FLOTANTE WHATSAPP -->
+  <a href="https://wa.me/523317575573?text=Hola%20Tarimera%20FNG%2C%20quiero%20cotizar%20tarimas"
+     class="tn-wa-float"
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+    </svg>
+    Cotizar ahora
+  </a>
+
+  <script src="src/ds/tarimera-ds.js"></script>
+  <script>
+    // Carrusel de fondo fijo
+    const slides = document.querySelectorAll('.bg-slide');
+    let current = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextSlide() {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }
+
+    showSlide(0);
+    setInterval(nextSlide, 30000); // cada 30 segundos
+
+    // FAQ toggle
+    function toggleFaq(el) {
+      const item = el.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = answer.style.display === 'block';
+      answer.style.display = isOpen ? 'none' : 'block';
+      el.querySelector('span').textContent = isOpen ? '+' : '−';
+    }
+    document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+
+    // Formulario a WhatsApp
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const telefono = document.getElementById('telefono').value;
+      const tipo = document.getElementById('tipo').value;
+      const cantidad = document.getElementById('cantidad').value;
+      const mensaje = document.getElementById('mensaje').value;
+      const text = `Hola%2C%20quiero%20cotizar%3A%0A%0A📛%20Nombre%3A%20${nombre}%0A📞%20Tel%3A%20${telefono}%0A📦%20Tipo%3A%20${tipo}%0A🔢%20Cantidad%3A%20${cantidad}%0A💬%20Mensaje%3A%20${mensaje}`;
+      window.open(`https://wa.me/523317575573?text=${text}`, '_blank');
+    });
+  </script>
+</body>
+</html>

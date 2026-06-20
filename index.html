@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tarimera FNG · Tarimas de Calidad Industrial en Zapopan, Jalisco</title>
+    <meta name="description" content="Fabricación y venta de tarimas de madera nuevas y recuperadas en Zapopan. Entrega en 24-48h. Calidad industrial para exportación. Cotiza ahora.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Tarimera FNG">
+    <meta property="og:type"        content="website">
+    <meta property="og:locale"      content="es_MX">
+    <meta property="og:site_name"   content="Tarimera FNG">
+    <meta property="og:title"       content="Tarimera FNG · Tarimas de Calidad Industrial en Zapopan">
+    <meta property="og:description" content="Fabricación y venta de tarimas de madera nuevas y recuperadas en Zapopan, Jalisco. Soluciones industriales.">
+    <meta property="og:image"       content="tarima-fng-marca.jpg">
+    <meta name="twitter:card"       content="summary_large_image">
+    <link rel="icon" type="image/png" href="src/img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/ds/tarimera-ds.css">
+    <style>
+        :root {
+            /* Palette updated for a more industrial and wood-focused feel */
+            --primary: #5D4037; /* Warm dark brown - wood */
+            --primary-dark: #3E2723;
+            --secondary: #E67E22; /* Burnt orange - accent/branding */
+            --secondary-dark: #D35400;
+            --accent: #27AE60; /* Natural green - eco/recuperadas */
+            --dark: #212121;
+            --white: #FFFFFF;
+            --gray-100: #F5F5F5;
+            --gray-200: #EEEEEE;
+            --gray-700: #616161;
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+            --transition: all 0.3s ease;
+            --font-headings: 'Oswald', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-serif: 'Source Serif 4', serif;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: var(--font-body); line-height:1.6; color:var(--gray-700); background:var(--white); }
+        .container { width:100%; max-width:1200px; margin:0 auto; padding:0 5%; }
+        h1, h2, h3, h4 { font-family: var(--font-headings); text-transform: uppercase; letter-spacing: 0.5px; color: var(--dark); }
+
+        /* Navigation override - using industrial fonts */
+        .tn-nav .tn-logo { font-family: var(--font-headings); font-weight: 700; color: var(--primary-dark); }
+        .tn-nav .tn-logo-accent { color: var(--secondary); }
+        .tn-nav-links a { font-family: var(--font-headings); text-transform: uppercase; color: var(--dark); }
+
+        /* Hero */
+        .hero {
+            margin-top: 72px;
+            min-height: 70vh;
+            /* Updated hero background with the new brand image and a heavy gradient overlay */
+            background: linear-gradient(135deg, rgba(62,39,35,0.9) 0%, rgba(139,69,19,0.7) 100%),
+                        url('tarima-fng-marca.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+        }
+        .hero-content { width:100%; max-width: 800px; margin: 0 auto; }
+        .hero-content h1 { font-size:3.5rem; font-weight:700; margin-bottom:1rem; line-height:1.1; color: var(--white); text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .hero-content p  { font-size:1.4rem; margin-bottom:2.5rem; opacity:.95; font-family: var(--font-serif); font-weight: 300; text-shadow: 1px 1px 2px rgba(0,0,0,0.4); }
+
+        /* Hub */
+        .hub-section { padding:6rem 0; background:var(--gray-100); }
+        .section-title    { text-align:center; font-size:2.8rem; color:var(--primary-dark); margin-bottom:1rem; }
+        .section-subtitle { text-align:center; font-size:1.15rem; color:var(--gray-700); margin-bottom:4rem; max-width:700px; margin-left:auto; margin-right:auto; font-family: var(--font-serif); }
+        .buttons-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; max-width:1000px; margin:0 auto; }
+        .btn-hub {
+            background:var(--white); padding:3rem 2rem; border-radius:12px;
+            text-align:center; text-decoration:none; color:var(--dark);
+            box-shadow:var(--shadow-md); transition:var(--transition);
+            border:3px solid transparent; display:block;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .btn-hub:hover { transform:translateY(-8px); box-shadow:var(--shadow-lg); border-color:var(--secondary); }
+        .btn-hub.highlight { background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%); color:var(--white); }
+        .btn-hub .icon { font-size:3.5rem; display:block; margin-bottom:1.5rem; }
+        .btn-hub h3 { font-size:1.6rem; margin-bottom:.75rem; color: inherit; }
+        .btn-hub.highlight h3 { color: var(--white); }
+        .btn-hub p  { font-size:1rem; opacity:.85; font-family: var(--font-body); font-weight: 400; text-transform: none; letter-spacing: normal; }
+
+        /* Stats */
+        .stats-section { padding:5rem 0; background:var(--white); border-top: 1px solid var(--gray-200); }
+        .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2.5rem; text-align:center; }
+        .stat-item { padding: 2rem; background: var(--gray-100); border-radius: 8px; border: 1px solid var(--gray-200); }
+        .stat-item h3 { font-size:3rem; color:var(--secondary); margin-bottom:.5rem; font-weight: 700; }
+        .stat-item p  { color:var(--primary-dark); font-weight:600; font-family: var(--font-body); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+
+        /* Footer */
+        .tn-footer { background-color: var(--primary-dark); color: var(--gray-100); }
+        .tn-footer .tn-logo { color: var(--white); font-family: var(--font-headings); font-weight: 700; }
+        .tn-footer .tn-logo-accent { color: var(--secondary); }
+        .tn-footer-heading { font-family: var(--font-headings); text-transform: uppercase; color: var(--white); letter-spacing: 1px; margin-bottom: 1.5rem; }
+        .tn-footer-links a { color: var(--gray-200); font-family: var(--font-body); text-transform: none; font-weight: 400; }
+        .tn-footer-copy { border-top-color: rgba(255,255,255,0.1); font-family: var(--font-body); }
+
+        /* WA Float industrial override */
+        .tn-wa-float { font-family: var(--font-headings); text-transform: uppercase; font-weight: 600; }
+
+        @media(max-width:768px) {
+            .hero-content h1 { font-size:2.5rem; }
+            .hero-content p  { font-size:1.1rem; }
+            .buttons-grid    { grid-template-columns:1fr; gap: 1.5rem; }
+            .section-title { font-size: 2.2rem; }
+            .btn-hub { padding: 2.5rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="tn-nav" id="tn-nav">
+  <div class="tn-nav-inner">
+    <a href="index.html" class="tn-logo">Tarimera <span class="tn-logo-accent">FNG</span></a>
+    <ul class="tn-nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="catalogo-funnel.html">Catálogo</a></li>
+      <li><a href="landing-tarimas.html">Productos</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+    <a href="https://wa.me/523317575573?text=Hola%2C%20quiero%20cotizar" class="tn-btn tn-btn-primary tn-btn-sm">Cotizar</a>
+  </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Tarimas Industriales para Carga Pesada y Exportación</h1>
+            <p>Fabricación y venta de tarimas de madera nuevas y recuperadas en Zapopan, Jalisco. Calidad certificada, entrega en 24-48 horas.</p>
+        </div>
+    </div>
+</section>
+
+<section class="hub-section">
+    <div class="container">
+        <h2 class="section-title">Soluciones de Carga</h2>
+        <p class="section-subtitle">Selecciona una opción y cotiza tus tarimas de inmediato</p>
+        <div class="buttons-grid">
+            <a href="catalogo-funnel.html" class="btn-hub">
+                <span class="icon">📦</span>
+                <h3>Ver Catálogo</h3>
+                <p>Explora nuestras tarimas certificadas: nuevas, recuperadas y especializadas</p>
+            </a>
+            <a href="landing-tarimas.html" class="btn-hub">
+                <span class="icon">🪵</span>
+                <h3>Línea de Productos</h3>
+                <p>Conoce las especificaciones técnicas de todas nuestras tarimas de madera</p>
+            </a>
+            <a href="contacto.html" class="btn-hub highlight">
+                <span class="icon">📞</span>
+                <h3>Cotizar Pedido</h3>
+                <p>Solicita tu presupuesto personalizado en menos de 30 minutos</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item"><h3>10+ AÑOS</h3><p>Experiencia Industrial</p></div>
+            <div class="stat-item"><h3>50K+</h3><p>Tarimas Fabricadas</p></div>
+            <div class="stat-item"><h3>500+</h3><p>Clientes Corporativos</p></div>
+            <div class="stat-item"><h3>24-48H</h3><p>Entrega Garantizada</p></div>
+        </div>
+    </div>
+</section>
+
+<footer class="tn-footer">
+  <div class="tn-container">
+    <div class="tn-footer-grid">
+      <div>
+        <a href="index.html" class="tn-logo" style="margin-bottom:1rem;display:inline-flex">Tarimera <span class="tn-logo-accent">FNG</span></a>
+        <p class="tn-footer-brand">Líderes en fabricación y venta de tarimas de madera en Zapopan, Jalisco. Soluciones logísticas de alta calidad con entrega rápida.</p>
+      </div>
+      <div>
+        <p class="tn-footer-heading">Productos</p>
+        <ul class="tn-footer-links">
+          <li><a href="catalogo-funnel.html">Tarimas nuevas</a></li>
+          <li><a href="catalogo-funnel.html?f=recuperadas">Tarimas recuperadas</a></li>
+          <li><a href="catalogo-funnel.html?f=especializadas">Especializadas</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="tn-footer-heading">Contacto Industrial</p>
+        <ul class="tn-footer-links">
+          <li><a href="tel:3317575573">33 1757 5573</a></li>
+          <li><a href="mailto:ventas@tarimerafng.com">ventas@tarimerafng.com</a></li>
+          <li><a href="contacto.html">Formulario de cotización</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="tn-footer-copy">
+      <span>&copy; 2026 Tarimera FNG · Zapopan, Jalisco, México</span>
+      <span>Sitio por <a href="https://wa.me/523317575573" style="color:var(--secondary)">OSTP @echoShift</a></span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/523317575573?text=Hola%20Tarimera%20FNG%2C%20quiero%20cotizar%20tarimas"
+   class="tn-wa-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+  </svg>
+  Cotizar ahora
+</a>
+</body>
+</html>
